@@ -21,33 +21,53 @@
 	
 			<form role="form">
 				<fieldset>
-					<script>
-					
-						function autenticar() {
-							var username = document.getElementById("username").value;
-							var password = document.getElementById("password").value;				
-										// Verificar as informações de login
-							if (username === "raesk6969" && password === "raesk6969") {
-								alert("Login bem-sucedido!");
-								window.location.href = "https://fourhanrring-poslogin.github.io/index2.html"; 
-								// Redirecionar para a página do Google
-							} else {
-								alert("Nome de usuário ou senha incorretos!");
-							}
-						}
-					</script>
+    <h1>Por favor, faça login</h1>
+    <form id="loginForm" onsubmit="return validateForm()">
+        <p <input type="text" id="username" placeholder="Nome de usuário"> </p>
+        <input type="password" id="password" placeholder="Senha">
+        <input type="submit" value="Entrar">
+    </form>
 
-					<h1>Autenticação de Usuário</h1>
+    <div id="functions" style="display: none;">
+        <h2>Funções do Programa</h2>
+        <button onclick="function1()">Função 1</button>
+        <button onclick="function2()">Função 2</button>
+        <button onclick="logout()">Sair</button>
+    </div>
 
-					<form>
-						<p><label for="username">Nome de usuário:</label></p>
-						<input type="text" id="username" required>
+    <script>
+        function validateForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
 
-						<p><label for="password">Senha:</label></p>
-						<input type="password" id="password" required>
+            // Verifica se as credenciais estão corretas
+            if (username === "usuario" && password === "senha") {
+                document.getElementById("loginForm").style.display = "none"; // Esconde o formulário de login
+                document.getElementById("functions").style.display = "block"; // Mostra as funções do programa
+                return false; // Para evitar o envio do formulário
+            } else {
+                alert("Credenciais incorretas. Tente novamente.");
+                return false; // Para evitar o envio do formulário
+            }
+        }
 
-						<input type="button" value="Entrar" onclick="autenticar()">
-					</form>
+        function function1() {
+            alert("Você executou a função 1.");
+        }
+
+        function function2() {
+            alert("Você executou a função 2.");
+        }
+
+        function logout() {
+            document.getElementById("username").value = ""; // Limpa o campo de nome de usuário
+            document.getElementById("password").value = ""; // Limpa o campo de senha
+            document.getElementById("functions").style.display = "none"; // Esconde as funções do programa
+            document.getElementById("loginForm").style.display = "block"; // Mostra o formulário de login novamente
+        }
+    </script>
+</body>
+</form>
 
 					<p class="txt-center ls-login-signup">Não possui um usuário na Rousier.net? Contate o dono e compre seu login!
 						<body>
