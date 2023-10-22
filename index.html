@@ -69,9 +69,13 @@
                         if (lines[i].indexOf(word) !== -1) {
                             results.push("Linha " + (i + 1) + ": " + lines[i]);
                         }
+                        // Exibir resultados em grupos de 10
+                        if (results.length >= 10) {
+                            displayResults(results.join('\n'));
+                            results = [];
+                        }
                     }
-                    var resultText = results.length > 0 ? results.join('\n') : "Palavra não encontrada.";
-                    document.getElementById("searchResult").textContent = resultText;
+                    displayResults(results.join('\n'));
                 };
                 reader.readAsText(file);
             } else {
@@ -79,6 +83,12 @@
             }
 
             return false;
+        }
+
+        function displayResults(resultText) {
+            var searchResult = document.getElementById("searchResult");
+            searchResult.textContent += resultText;
+            searchResult.scrollTop = searchResult.scrollHeight; // Rolagem automática para baixo
         }
     </script>
 </body>
