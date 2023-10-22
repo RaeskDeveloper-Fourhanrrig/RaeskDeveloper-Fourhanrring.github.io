@@ -2,6 +2,18 @@
 <html>
 <head>
     <title>Login e Pesquisa</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        #login, #search {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
     <div id="login">
@@ -21,7 +33,7 @@
             <label for="word">Palavra:</label>
             <input type="text" id="word" name="word" required><br><br>
             <label for="file">Arquivo:</label>
-            <input type="text" id="file" name="file" required><br><br>
+            <input type="file" id="fileInput" name="fileInput" accept=".txt" required><br><br>
             <input type="submit" value="Pesquisar">
         </form>
         <p id="searchResult"></p>
@@ -44,12 +56,22 @@
 
         function searchWord() {
             var word = document.getElementById("word").value;
-            var fileContents = document.getElementById("file").value;
+            var fileInput = document.getElementById("fileInput");
+            var file = fileInput.files[0];
 
-            if (fileContents.includes(word)) {
-                document.getElementById("searchResult").textContent = "Palavra encontrada.";
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var fileContents = e.target.result;
+                    if (fileContents.includes(word)) {
+                        document.getElementById("searchResult").textContent = "Palavra encontrada.";
+                    } else {
+                        document.getElementById("searchResult").textContent = "Palavra não encontrada.";
+                    }
+                };
+                reader.readAsText(file);
             } else {
-                document.getElementById("searchResult").textContent = "Palavra não encontrada.";
+                document.getElementById("searchResult").textContent = "Selecione um arquivo.";
             }
 
             return false;
