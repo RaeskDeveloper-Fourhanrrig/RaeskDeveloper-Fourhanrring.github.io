@@ -45,7 +45,7 @@
             var password = document.getElementById("password").value;
 
             if (username === "raesk6969" && password === "raesk6969") {
-                document.getElementById("login").style.display = "none";
+                document.getElementById("login").style display = "none";
                 document.getElementById("search").style.display = "block";
                 return false;
             } else {
@@ -61,6 +61,8 @@
 
             if (file) {
                 var reader = new FileReader();
+                var searchResult = document.getElementById("searchResult");
+                searchResult.textContent = ""; // Limpar resultados anteriores
                 reader.onload = function(e) {
                     var fileContents = e.target.result;
                     var lines = fileContents.split('\n');
@@ -69,13 +71,12 @@
                         if (lines[i].indexOf(word) !== -1) {
                             results.push("Linha " + (i + 1) + ": " + lines[i]);
                         }
-                        // Exibir resultados em grupos de 10
-                        if (results.length >= 10) {
-                            displayResults(results.join('\n'));
-                            results = [];
-                        }
                     }
-                    displayResults(results.join('\n'));
+                    if (results.length > 0) {
+                        searchResult.textContent = results.join('\n');
+                    } else {
+                        searchResult.textContent = "Palavra não encontrada.";
+                    }
                 };
                 reader.readAsText(file);
             } else {
@@ -83,12 +84,6 @@
             }
 
             return false;
-        }
-
-        function displayResults(resultText) {
-            var searchResult = document.getElementById("searchResult");
-            searchResult.textContent += resultText;
-            searchResult.scrollTop = searchResult.scrollHeight; // Rolagem automática para baixo
         }
     </script>
 </body>
