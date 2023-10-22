@@ -1,106 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Fourhanrring</title>
-	<style>
-		body {
-			background-color: black;
-		}
-		h1 {
-			color: red;
-		}
-		p {
-			color: red;
-		}
-	</style>
+    <title>Login e Pesquisa</title>
 </head>
 <body>
-	<div class="box-parent-login">
-		<div class="well bg-white box-login">
-			<h1 class="ls-login-logo">Fourhanrring Berstrafer Painel</h1>
-	
-			<form role="form">
-				<fieldset>
-					<script>
-					
-						function autenticar() {
-							var username = document.getElementById("username").value;
-							var password = document.getElementById("password").value;				
-										// Verificar as informações de login
-							if (username === "raesk6969" && password === "raesk6969") {
-								alert("Login bem-sucedido!");
-								window.location.href = "https://fourhanrring-poslogin.github.io/index2.html"; 
-								// Redirecionar para a página do Google
-							} else {
-								alert("Nome de usuário ou senha incorretos!");
-							}
-						}
-					</script>
+    <div id="login">
+        <h2>Login</h2>
+        <form id="loginForm" onsubmit="return checkLogin()">
+            <label for="username">Usuário:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+    
+    <div id="search" style="display: none;">
+        <h2>Pesquisa de Palavra</h2>
+        <form id="searchForm" onsubmit="return searchWord()">
+            <label for="word">Palavra:</label>
+            <input type="text" id="word" name="word" required><br><br>
+            <label for="file">Arquivo:</label>
+            <input type="text" id="file" name="file" required><br><br>
+            <input type="submit" value="Pesquisar">
+        </form>
+        <p id="searchResult"></p>
+    </div>
 
-					<h1>Autenticação de Usuário</h1>
+    <script>
+        function checkLogin() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
 
-					<form>
-						<p><label for="username">Nome de usuário:</label></p>
-						<input type="text" id="username" required>
+            if (username === "raesk6969" && password === "raesk6969") {
+                document.getElementById("login").style.display = "none";
+                document.getElementById("search").style.display = "block";
+                return false;
+            } else {
+                alert("Credenciais inválidas. Tente novamente.");
+                return false;
+            }
+        }
 
-						<p><label for="password">Senha:</label></p>
-						<input type="password" id="password" required>
+        function searchWord() {
+            var word = document.getElementById("word").value;
+            var fileContents = document.getElementById("file").value;
 
-						<input type="button" value="Entrar" onclick="autenticar()">
-					</form>
+            if (fileContents.includes(word)) {
+                document.getElementById("searchResult").textContent = "Palavra encontrada.";
+            } else {
+                document.getElementById("searchResult").textContent = "Palavra não encontrada.";
+            }
 
-					<p class="txt-center ls-login-signup">Não possui um usuário na Rousier.net? Contate o dono e compre seu login!
-						<body>
-    <a href="https://wa.me/5541987520126" target="_blank">Entre em contato com o dono!</a>
+            return false;
+        }
+    </script>
 </body>
-					</p>
-
-					<p class="txt-cenfer ls-login-signup">Painel has been created by Raesk.</p>
-
-					<fieldset></fieldset>
-				</fieldset>
-			</form>
-		</div>
-	</div>
-
-	<p class="txt-cenfer ls-login-signup">What is the "Fourhanrring Painel"?. This is a tool for the ban WhatsApp numbers. Well, I (Raesk, Fourhanrring creator), recommend you don't use this "painel". If you will use, have responsibility. I do not take responsibility if you use it irresponsibly.</p>
-	<body>
-		<p
-				class="txt-cenfer ls-login-signup">In error case, contact the developer:
-    <a href="https://wa.me/5541987520126" target="_blank">Contact of painel Developer </a>
-</body>
-</p>
-
-	<h1 class="ls-login-logo">Credits From:</h1>
-	<p class="txt-cenfer ls-login-signup">Developer - Raesk</p>
-	<p class="txt-cenfer ls-login-signup">Programmer - Raesk</p>
-	<p class="txt-cenfer ls-login-signup">Helper - Snape</p>
-
-</body>
-</body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </html>
