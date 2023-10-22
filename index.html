@@ -63,8 +63,15 @@
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     var fileContents = e.target.result;
-                    if (fileContents.includes(word)) {
-                        document.getElementById("searchResult").textContent = "Palavra encontrada.";
+                    var lines = fileContents.split('\n');
+                    var results = [];
+                    for (var i = 0; i < lines.length; i++) {
+                        if (lines[i].includes(word)) {
+                            results.push("Linha " + (i + 1) + ": " + lines[i]);
+                        }
+                    }
+                    if (results.length > 0) {
+                        document.getElementById("searchResult").textContent = results.join('\n');
                     } else {
                         document.getElementById("searchResult").textContent = "Palavra não encontrada.";
                     }
