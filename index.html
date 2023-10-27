@@ -1,60 +1,108 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Formulário de Login e Pesquisa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Formulário de Login</title>
   <style>
     body {
-      background-color: black;
-      color: red; /* Alterado para vermelho */
+      font-size: 16px;
+      margin: 0;
+      padding: 0;
+      background-color: black; /* Cor de fundo preta */
+      color: red; /* Cor da fonte vermelha */
     }
-
-    #resultado {
-      color: green;
+    form {
+      width: 80%;
+      max-width: 300px;
+      margin: 0 auto;
     }
-
-    /* Estilo para os campos "Login" e "Senha" */
-    #login, #senha {
-      color: white;
+    label, input, input[type="submit"] {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    table {
+      font-size: 14px;
+    }
+    th {
+      color: black;
     }
   </style>
 </head>
 <body>
-  <h1>Formulário de Login</h1>
-  <form id="loginForm">
-    <label for="login">Login:</label>
-    <input type="text" id="login" name="login" required>
-    <label for="senha">Senha:</label>
-    <input type="password" id="senha" name="senha" required>
-    <input type="submit" value="Login">
-  </form>
+  <div id="loginContainer">
+    <form id="loginForm" action="#" method="post">
+      <label for="usuario">Usuário:</label>
+      <input type="text" id="usuario" name="usuario" required>
 
-  <div id="searchForm" style="display: none;">
-    <h2>Pesquisa em Arquivo</h2>
-    <label for="palavra">Digite a palavra/url que deseja filtrar no arquivo:</label>
-    <input type="text" id="palavra" name="palavra">
-    <input type="file" id="arquivo" name="arquivo" accept=".txt">
-    <input type="button" value="Pesquisar" onclick="realizarPesquisa()">
-    <div id="resultado"></div>
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha" name="senha" required>
+
+      <input type="submit" value="Login">
+    </form>
+    <p id="mensagem" style="color: green;"></p>
+  </div>
+
+  <div id="tabelaContainer" style="display: none;">
+    <h1>Logins</h1>
+    <table border="1">
+      <tr>
+        <th>Sites</th>
+        <th>Email</th>
+        <th>Senha</th>
+      </tr>
+      <tr>
+        <td><a href="https://techbusca.org" target="_blank">techbuscas</a></td>
+        <td>email1@example.com</td>
+        <td>senha1</td>
+      </tr>
+      <tr>
+        <td><a href="https://i-find.org" target="_blank">i-find</a></td> <!-- Alterando "Site2" para "i-find" e adicionando link -->
+        <td>email2@example.com</td>
+        <td>senha2</td> <!-- Inserindo a senha para i-find -->
+      </tr>
+    </table>
   </div>
 
   <script>
     document.getElementById('loginForm').addEventListener('submit', function (e) {
       e.preventDefault();
-      var login = document.getElementById('login').value;
+      var usuario = document.getElementById('usuario').value;
       var senha = document.getElementById('senha').value;
-      var searchForm = document.getElementById('searchForm');
+      var loginContainer = document.getElementById('loginContainer');
+      var tabelaContainer = document.getElementById('tabelaContainer');
 
-      if (login === 'operador1' && senha === 'operador2') {
-        searchForm.style.display = 'block';
+      if (usuario === 'raesk6969' && senha === 'raesk6969') {
+        document.getElementById('mensagem').style.color = 'green';
+        document.getElementById('mensagem').innerText = 'Script acessado com sucesso!';
+        
+        // Oculta o formulário e exibe a tabela
+        loginContainer.style.display = 'none';
+        tabelaContainer.style.display = 'block';
+
+        // Adicionar campos de pesquisa aqui
+        var pesquisaContainer = document.createElement('div');
+        pesquisaContainer.id = 'pesquisaContainer';
+        pesquisaContainer.innerHTML = `
+          <h2>Pesquisar</h2>
+          <label for="filtro">Digite a palavra/url que deseja filtrar no arquivo:</label>
+          <input type="text" id="filtro" name="filtro">
+          <label for="arquivo">Adicione o arquivo que deseja pesquisar:</label>
+          <input type="file" id="arquivo" name="arquivo" accept=".txt">
+          <input type="button" value="Pesquisar" onclick="realizarPesquisa()">
+          <div id="resultadoPesquisa"></div>
+        `;
+        tabelaContainer.appendChild(pesquisaContainer);
       } else {
-        alert('Credenciais inválidas. Tente novamente.');
+        document.getElementById('mensagem').style.color = 'red';
+        document.getElementById('mensagem').innerText = 'Acesso ao script negado, compre acesso com um de nossos vendedores oficiais.';
       }
     });
 
     function realizarPesquisa() {
-      var palavra = document.getElementById('palavra').value;
+      var filtro = document.getElementById('filtro').value;
       var arquivoInput = document.getElementById('arquivo');
-      var resultado = document.getElementById('resultado');
+      var resultadoPesquisa = document.getElementById('resultadoPesquisa');
       
       var arquivo = arquivoInput.files[0];
       var reader = new FileReader();
@@ -65,17 +113,17 @@
         var encontradas = [];
 
         for (var i = 0; i < linhas.length; i++) {
-          if (linhas[i].includes(palavra)) {
+          if (linhas[i].includes(filtro)) {
             encontradas.push(linhas[i]);
           }
         }
 
         if (encontradas.length > 0) {
-          resultado.style.color = 'green';
-          resultado.innerHTML = 'Resultados encontrados:<br>' + encontradas.join('<br>');
+          resultadoPesquisa.style.color = 'green';
+          resultadoPesquisa.innerHTML = 'Resultados encontrados:<br>' + encontradas.join('<br>');
         } else {
-          resultado.style.color = 'red';
-          resultado.innerText = 'Nada encontrado!';
+          resultadoPesquisa.style.color = 'red';
+          resultadoPesquisa.innerText = 'Nada encontrado!';
         }
       };
 
