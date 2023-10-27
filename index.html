@@ -1,87 +1,96 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Formulário de Login</title>
+  <title>Formulário de Login e Pesquisa</title>
   <style>
     body {
-      font-size: 16px;
-      margin: 0;
-      padding: 0;
+      background-color: black;
+      color: white;
     }
-    form {
-      width: 80%;
-      max-width: 300px;
-      margin: 0 auto;
+
+    input, label {
+      color: white;
     }
-    label, input, input[type="submit"] {
-      display: block;
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    table {
-      font-size: 14px;
-    }
-    th {
-      color: black;
+
+    #resultado {
+      color: green;
     }
   </style>
 </head>
 <body>
-  <div id="loginContainer">
-    <form id="loginForm" action="#" method="post">
-      <label for="usuario">Usuário:</label>
-      <input type="text" id="usuario" name="usuario" required>
+  <h1>Formulário de Login</h1>
+  <form id="loginForm">
+    <label for="login">Login:</label>
+    <input type="text" id="login" name="login" required>
+    <label for="senha">Senha:</label>
+    <input type="password" id="senha" name="senha" required>
+    <input type="submit" value="Login">
+  </form>
 
-      <label for="senha">Senha:</label>
-      <input type="password" id="senha" name "senha" required>
-
-      <input type="submit" value="Login">
-    </form>
-    <p id="mensagem" style="color: green;"></p>
-  </div>
-
-  <div id="tabelaContainer" style="display: none;">
-    <h1>Logins</h1>
-    <table border="1">
-      <tr>
-        <th>Sites</th>
-        <th>Email</th>
-        <th>Senha</th> <!-- Adicionando a coluna Senha -->
-      </tr>
-      <tr>
-        <td><a href="https://techbusca.org" target="_blank">techbuscas</a></td> <!-- Transformando "techbuscas" em um link -->
-        <td>email1@example.com</td>
-        <td>senha1</td> <!-- Inserindo a senha para techbuscas -->
-      </tr>
-      <tr>
-        <td>Site2</td>
-        <td>email2@example.com</td>
-        <td>senha2</td>
-      </tr>
-    </table>
+  <div id="searchForm" style="display: none;">
+    <h2>Pesquisa em Arquivo</h2>
+    <label for="palavra">Digite a palavra/url que deseja filtrar no arquivo:</label>
+    <input type="text" id="palavra" name="palavra">
+    <input type="file" id="arquivo" name="arquivo" accept=".txt">
+    <input type="button" value="Pesquisar" onclick="realizarPesquisa()">
+    <div id="resultado"></div>
   </div>
 
   <script>
     document.getElementById('loginForm').addEventListener('submit', function (e) {
       e.preventDefault();
-      var usuario = document.getElementById('usuario').value;
+      var login = document.getElementById('login').value;
       var senha = document.getElementById('senha').value;
-      var loginContainer = document.getElementById('loginContainer');
-      var tabelaContainer = document.getElementById('tabelaContainer');
+      var searchForm = document.getElementById('searchForm');
 
-      if (usuario === 'raesk6969' && senha === 'raesk6969') {
-        document.getElementById('mensagem').style.color = 'green';
-        document.getElementById('mensagem').innerText = 'Script acessado com sucesso!';
-        
-        // Oculta o formulário e exibe a tabela
-        loginContainer.style.display = 'none';
-        tabelaContainer.style.display = 'block';
+      if (login === 'operador1' && senha === 'operador2') {
+        searchForm.style.display = 'block';
       } else {
-        document.getElementById('mensagem').style.color = 'red';
-        document.getElementById('mensagem').innerText = 'Acesso ao script negado, compre acesso com um de nossos vendedores oficiais.';
+        alert('Credenciais inválidas. Tente novamente.');
       }
     });
+
+    function realizarPesquisa() {
+      var palavra = document.getElementById('palavra').value;
+      var arquivoInput = document.getElementById('arquivo');
+      var resultado = document.getElementById('resultado');
+      
+      var arquivo = arquivoInput.files[0];
+      var reader = new FileReader();
+      
+      reader.onload = function(e) {
+        var conteudo = e.target.result;
+        var linhas = conteudo.split('\n');
+        var encontradas = [];
+
+        for (var i = 0; i < linhas.length; i++) {
+          if (linhas[i].includes(palavra)) {
+            encontradas.push(linhas[i]);
+          }
+        }
+
+        if (encontradas.length > 0) {
+          resultado.style.color = 'green';
+          resultado.innerHTML = 'Resultados encontrados:<br>' + encontradas.join('<br>');
+        } else {
+          resultado.style.color = 'red';
+          resultado.innerText = 'Nada encontrado!';
+        }
+      };
+
+      reader.readAsText(arquivo);
+    }
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
