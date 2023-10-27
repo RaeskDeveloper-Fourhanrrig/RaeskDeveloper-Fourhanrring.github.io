@@ -9,11 +9,16 @@
     }
 
     input, label {
-      color: black; /* Alterado para preto */
+      color: black;
     }
 
     #resultado {
       color: green;
+    }
+
+    /* Estilo para os campos "Login" e "Senha */
+    #login, #senha {
+      color: white;
     }
   </style>
 </head>
@@ -44,7 +49,7 @@
       var searchForm = document.getElementById('searchForm');
 
       if (login === 'operador1' && senha === 'operador2') {
-        searchForm.style display = 'block';
+        searchForm.style.display = 'block';
       } else {
         alert('Credenciais inválidas. Tente novamente.');
       }
@@ -83,10 +88,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
