@@ -1,67 +1,74 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <script>
-        function checkCredentials() {
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-
-            if (username === "raesk6969" && password === "raesk6969") {
-                document.getElementById("loginStatus").innerHTML = "<span style='color: green;'>Credenciais válidas!</span>";
-                document.getElementById("searchBar").style.display = "block";
-                document.getElementById("footer").style.display = "block";
-            } else {
-                document.getElementById("loginStatus").innerHTML = "<span style='color: red;'>Senha incorreta</span>";
-            }
-        }
-    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Formulário de Login</title>
+  <style>
+    body {
+      font-size: 16px;
+      margin: 0;
+      padding: 0;
+    }
+    form {
+      width: 80%;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    label, input, input[type="submit"] {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
-
 <body>
-    <h1>Login</h1>
-    <label for="username">Usuário:</label>
-    <input type="text" id="username">
-    <br>
-    <label for="password">Senha:</label>
-    <input type="password" id="password">
-    <br>
-    <button onclick="checkCredentials()">Entrar</button>
-    <p id="loginStatus"></p>
+  <form id="loginForm" action="#" method="post">
+    <label for="usuario">Usuário:</label>
+    <input type="text" id="usuario" name="usuario" required>
 
-    <div id="searchBar" style="display: none;">
-        <h2>Barra de pesquisa</h2>
-        <!-- Aqui você pode adicionar a barra de pesquisa -->
-    </div>
+    <label for="senha">Senha:</label>
+    <input type="password" id="senha" name="senha" required>
 
-    <div id="footer" style="display: none;">
-        <p style="color: red;">Developed by Raesk [1.0 version]<br>
-            em caso de erro, entre em contato <span style="color: blue;"><a href="https://wa.me/+436993999904763">comigo</a></span>
-        </p>
-    </div>
+    <input type="submit" value="Login">
+  </form>
+
+  <p id="mensagem" style="color: green;"></p>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var usuario = document.getElementById('usuario').value;
+      var senha = document.getElementById('senha').value;
+
+      if (usuario === 'raesk6969' && senha === 'raesk6969') {
+        document.getElementById('mensagem').style.color = 'green';
+        document.getElementById('mensagem').innerText = 'Script acessado com sucesso!';
+      } else {
+        document.getElementById('mensagem').style.color = 'red';
+        document.getElementById('mensagem').innerText = 'Acesso ao script negado, compre acesso com um de nossos vendedores oficiais.';
+      }
+    });
+  </script>
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-m
-
-
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
