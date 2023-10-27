@@ -1,90 +1,44 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Login e Pesquisa</title>
-    <style>
-        body {
-            background-color: black;
-            color: white;
-        }
-
-        #login, #search {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-        }
-    </style>
-</head>
-<body>
-    <div id="login">
-        <h2>Login</h2>
-        <form id="loginForm" onsubmit="return checkLogin()">
-            <label for="username">Usuário:</label>
-            <input type="text" id="username" name="username" required><br><br>
-            <label for="password">Senha:</label>
-            <input type="password" id="password" name="password" required><br><br>
-            <input type="submit" value="Login">
-        </form>
-    </div>
-    
-    <div id="search" style="display: none;">
-        <h2>Pesquisa de Palavra</h2>
-        <form id="searchForm" onsubmit="return searchWord()">
-            <label for="word">Palavra:</label>
-            <input type="text" id="word" name="word" required><br><br>
-            <label for="file">Arquivo:</label>
-            <input type="file" id="fileInput" name="fileInput" accept=".txt" capture="environment" required><br><br>
-            <input type="submit" value="Pesquisar">
-        </form>
-        <p id="searchResult"></p>
-    </div>
-
     <script>
-        function checkLogin() {
+        function checkCredentials() {
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;
 
             if (username === "raesk6969" && password === "raesk6969") {
-                document.getElementById("login").style.display = "none";
-                document.getElementById("search").style.display = "block";
-                return false;
+                document.getElementById("loginStatus").innerHTML = "<span style='color: green;'>Credenciais válidas!</span>";
+                document.getElementById("searchBar").style.display = "block";
+                document.getElementById("footer").style.display = "block";
             } else {
-                alert("Credenciais inválidas. Tente novamente.");
-                return false;
+                document.getElementById("loginStatus").innerHTML = "<span style='color: red;'>Senha incorreta</span>";
             }
-        }
-
-        function searchWord() {
-            var word = document.getElementById("word").value;
-            var fileInput = document.getElementById("fileInput");
-            var file = fileInput.files[0];
-
-            if (file) {
-                var reader = new FileReader();
-                var searchResult = document.getElementById("searchResult");
-                searchResult.textContent = ""; // Limpar resultados anteriores
-                reader.onload = function(e) {
-                    var fileContents = e.target.result;
-                    var lines = fileContents.split('\n');
-                    var results = [];
-                    for (var i = 0; i < lines.length; i++) {
-                        if (lines[i].indexOf(word) !== -1) {
-                            results.push("Linha " + (i + 1) + ": " + lines[i]);
-                        }
-                    }
-                    if (results.length > 0) {
-                        searchResult.textContent = results.join('\n');
-                    } else {
-                        searchResult.textContent = "Palavra não encontrada.";
-                    }
-                };
-                reader.readAsText(file);
-            } else {
-                document.getElementById("searchResult").textContent = "Selecione um arquivo.";
-            }
-
-            return false;
         }
     </script>
+</head>
+
+<body>
+    <h1>Login</h1>
+    <label for="username">Usuário:</label>
+    <input type="text" id="username">
+    <br>
+    <label for="password">Senha:</label>
+    <input type="password" id="password">
+    <br>
+    <button onclick="checkCredentials()">Entrar</button>
+    <p id="loginStatus"></p>
+
+    <div id="searchBar" style="display: none;">
+        <h2>Barra de pesquisa</h2>
+        <!-- Aqui você pode adicionar a barra de pesquisa -->
+    </div>
+
+    <div id="footer" style="display: none;">
+        <p style="color: red;">Developed by Raesk [1.0 version]<br>
+            In caso de erro, entre em contato com <span style="color: blue;"><a href="https://wa.me/+436993999904763">*me*</a></span>
+        </p>
+    </div>
 </body>
+
 </html>
