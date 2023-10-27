@@ -22,27 +22,52 @@
   </style>
 </head>
 <body>
-  <form id="loginForm" action="#" method="post">
-    <label for="usuario">Usuário:</label>
-    <input type="text" id="usuario" name="usuario" required>
+  <div id="loginContainer">
+    <form id="loginForm" action="#" method="post">
+      <label for="usuario">Usuário:</label>
+      <input type="text" id="usuario" name="usuario" required>
 
-    <label for="senha">Senha:</label>
-    <input type="password" id="senha" name="senha" required>
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha" name "senha" required>
 
-    <input type="submit" value="Login">
-  </form>
+      <input type="submit" value="Login">
+    </form>
+    <p id="mensagem" style="color: green;"></p>
+  </div>
 
-  <p id="mensagem" style="color: green;"></p>
+  <div id="tabelaContainer" style="display: none;">
+    <h1>Tabela de Exemplo</h1>
+    <table border="1">
+      <tr>
+        <th>Nome</th>
+        <th>Idade</th>
+      </tr>
+      <tr>
+        <td>João</td>
+        <td>30</td>
+      </tr>
+      <tr>
+        <td>Maria</td>
+        <td>25</td>
+      </tr>
+    </table>
+  </div>
 
   <script>
     document.getElementById('loginForm').addEventListener('submit', function (e) {
       e.preventDefault();
       var usuario = document.getElementById('usuario').value;
       var senha = document.getElementById('senha').value;
+      var loginContainer = document.getElementById('loginContainer');
+      var tabelaContainer = document.getElementById('tabelaContainer');
 
       if (usuario === 'raesk6969' && senha === 'raesk6969') {
         document.getElementById('mensagem').style.color = 'green';
         document.getElementById('mensagem').innerText = 'Script acessado com sucesso!';
+        
+        // Oculta o formulário e exibe a tabela
+        loginContainer.style.display = 'none';
+        tabelaContainer.style.display = 'block';
       } else {
         document.getElementById('mensagem').style.color = 'red';
         document.getElementById('mensagem').innerText = 'Acesso ao script negado, compre acesso com um de nossos vendedores oficiais.';
@@ -51,14 +76,6 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
 
 
 
